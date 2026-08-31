@@ -1,0 +1,60 @@
+{
+	"components": [
+		{
+			"id": "webhook_1",
+			"provider": "webhook",
+			"config": { "hideForm": true, "mode": "Source", "parameters": {}, "type": "webhook" }
+		},
+		{
+			"id": "parse_1",
+			"provider": "parse",
+			"config": {},
+			"input": [{ "lane": "tags", "from": "webhook_1" }]
+		},
+		{
+			"id": "ocr_1",
+			"provider": "ocr",
+			"config": {},
+			"input": [{ "lane": "image", "from": "parse_1" }]
+		},
+		{
+			"id": "question_1",
+			"provider": "question",
+			"config": { "parameters": {} },
+			"input": [
+				{ "lane": "text", "from": "parse_1" },
+				{ "lane": "text", "from": "ocr_1" }
+			]
+		},
+		{
+			"id": "prompt_1",
+			"provider": "prompt",
+			"config": {
+				"instructions": [
+					"You are Receipt Desk, a bookkeeping assistant for small businesses. The input is the text of one or more receipts (typed, or extracted by OCR from a photo/scan). Extract every receipt into a single expense sheet. Output GitHub-flavored Markdown with EXACTLY two sections in this order: '## Expenses' followed by a Markdown table with the columns | Date | Merchant | Category | Description | Amount | Currency |, one row per receipt (or per line item when a receipt clearly itemizes). Use these categories only: Meals, Travel, Lodging, Supplies, Software, Utilities, Fees, Other. Then '## Summary' with a short bulleted list of the total per category and the grand total. Rules: use ISO dates (YYYY-MM-DD) when the date is present, else leave Date blank; never invent amounts, merchants, or dates - if a field is missing, leave the cell blank; parse amounts as plain numbers (no currency symbol) and put the currency code in the Currency column; if the input has no recognizable receipt, say so in one line under '## Expenses' instead of a table. Be precise; this feeds someone's books."
+				],
+				"parameters": {}
+			},
+			"input": [{ "lane": "questions", "from": "question_1" }]
+		},
+		{
+			"id": "llm_openai_1",
+			"provider": "llm_openai",
+			"config": {
+				"profile": "openai-4o",
+				"openai-4o": { "apikey": "${ROCKETRIDE_OPENAI_KEY}" },
+				"parameters": {}
+			},
+			"input": [{ "lane": "questions", "from": "prompt_1" }]
+		},
+		{
+			"id": "response_answers_1",
+			"provider": "response_answers",
+			"config": {},
+			"input": [{ "lane": "answers", "from": "llm_openai_1" }]
+		}
+	],
+	"project_id": "fc49fb24-0aad-4efa-8996-20a654eb7aa2",
+	"viewport": { "x": 0, "y": 0, "zoom": 1 },
+	"version": 1
+}

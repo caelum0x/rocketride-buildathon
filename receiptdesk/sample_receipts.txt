@@ -1,0 +1,36 @@
+RECEIPT
+Blue Bottle Coffee
+1425 Market St, San Francisco, CA
+2026-08-28  10:14
+1x Cappuccino ............ 5.25
+1x Almond croissant ...... 4.50
+Subtotal ................. 9.75
+Tax ...................... 0.85
+TOTAL .................... 10.60 USD
+Visa ****1234
+
+--------------------------------
+
+Office Depot #212
+Receipt 08/29/2026
+Printer paper, 5 reams        42.99
+Stapler                        8.49
+Ballpoint pens (12pk)          6.25
+TOTAL                         57.73 USD
+Card
+
+--------------------------------
+
+UBER
+Trip 30 Aug 2026
+Pickup: 1425 Market St
+Dropoff: SFO Airport
+Fare .................... 38.40 USD
+Paid with Apple Pay
+
+--------------------------------
+
+Zoom Video Communications
+Invoice date: 2026-08-15
+Pro plan, monthly ........ 14.99 USD
+Billed to card on file

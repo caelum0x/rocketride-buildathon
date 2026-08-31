@@ -1,0 +1,64 @@
+{
+	"components": [
+		{
+			"id": "webhook_1",
+			"provider": "webhook",
+			"config": { "hideForm": true, "mode": "Source", "parameters": {}, "type": "webhook" }
+		},
+		{
+			"id": "parse_1",
+			"provider": "parse",
+			"config": {},
+			"input": [{ "lane": "tags", "from": "webhook_1" }]
+		},
+		{
+			"id": "ocr_1",
+			"provider": "ocr",
+			"config": {},
+			"input": [{ "lane": "image", "from": "parse_1" }]
+		},
+		{
+			"id": "question_1",
+			"provider": "question",
+			"config": { "parameters": {} },
+			"input": [
+				{ "lane": "text", "from": "parse_1" },
+				{ "lane": "text", "from": "ocr_1" }
+			]
+		},
+		{
+			"id": "prompt_1",
+			"provider": "prompt",
+			"config": {
+				"instructions": [
+					"You are Study Pack, a study assistant for university students. From the provided lecture material (a transcript, pasted notes, slide text, or text extracted from an uploaded document or photographed slide), produce ONE complete study pack in GitHub-flavored Markdown with EXACTLY these sections and headings, in this order: '## Summary' (3-5 sentences), '## Key Concepts' (a bulleted list of `term - definition` pairs), '## Detailed Notes' (structured sub-headings and bullet points that cover the material), '## Practice Questions' (8-10 numbered exam-style questions), and '## Answer Key' (numbered answers that correspond 1:1 to the practice questions). Base everything ONLY on the provided material - do not invent facts or add outside information. If the material is too short or unclear to build a full pack, say so in one sentence under '## Summary' and produce the best pack you can from what is given. Keep it concise and exam-focused."
+				],
+				"parameters": {}
+			},
+			"input": [{ "lane": "questions", "from": "question_1" }]
+		},
+		{
+			"id": "llm_ollama_1",
+			"provider": "llm_ollama",
+			"config": {
+				"profile": "custom",
+				"custom": {
+					"model": "llama3.1:8b",
+					"serverbase": "${ROCKETRIDE_OLLAMA_BASE}",
+					"modelTotalTokens": 128000
+				},
+				"parameters": {}
+			},
+			"input": [{ "lane": "questions", "from": "prompt_1" }]
+		},
+		{
+			"id": "response_answers_1",
+			"provider": "response_answers",
+			"config": {},
+			"input": [{ "lane": "answers", "from": "llm_ollama_1" }]
+		}
+	],
+	"project_id": "2f0398ec-fccb-4a8e-bf09-345a4d3e2819",
+	"viewport": { "x": 0, "y": 0, "zoom": 1 },
+	"version": 1
+}

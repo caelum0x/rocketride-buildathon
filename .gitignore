@@ -1,0 +1,13 @@
+# Upstream RocketRide clones — not ours; huge; kept locally as build bases only.
+engine/
+examples/
+workshops/
+
+# deps / build / secrets
+node_modules/
+dist/
+.env
+.env.local
+*.log
+.DS_Store
+electron-builder.recoder.json

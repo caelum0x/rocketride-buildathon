@@ -1,0 +1,35 @@
+Lecture 7 — Information Diffusion in Networks
+
+Today we covered how information, behaviours, and infections spread across a
+network of connected individuals. There are three broad families of models.
+
+1. Epidemic models. These borrow from epidemiology. Each node is in one of a few
+states. In the SI model a node is either Susceptible or Infected; once infected it
+stays infected forever. The SIR model adds a Recovered (removed) state: infected
+nodes eventually recover and can no longer spread or be reinfected. The SIS model
+lets infected nodes return to Susceptible, so an "infection" can circulate
+indefinitely. SIRS sits between SIR and SIS: recovered nodes lose immunity after a
+delay and become susceptible again. The key parameters are the infection rate beta
+(probability of transmission along an edge per contact) and the recovery rate gamma.
+The ratio R0 = beta / gamma determines whether an outbreak grows or dies out; an
+outbreak spreads when R0 > 1.
+
+2. Predictive / cascade models. The Independent Cascade (IC) model activates nodes
+probabilistically: when a node becomes active it gets a single chance to activate
+each inactive neighbour with an edge-specific probability. The Linear Threshold (LT)
+model instead gives each node a random threshold; a node activates when the summed
+weight of its already-active neighbours crosses that threshold. IC is "sender-driven"
+(each active node pushes once), LT is "receiver-driven" (a node waits until enough
+neighbours push).
+
+3. Influence models. Here the goal is influence maximisation: choose a small seed set
+of k nodes to activate first so that the expected final number of active nodes is as
+large as possible. The spread function is monotone and submodular, so a simple greedy
+algorithm that repeatedly adds the node with the largest marginal gain gives a
+(1 - 1/e) ≈ 63% approximation of the optimum. We distinguish individual influence
+(one node's effect), community influence (a cluster's effect), and the overall
+influence-maximisation objective.
+
+Takeaways: match the model to the phenomenon (persistent vs one-shot spread), remember
+that R0 = beta/gamma governs epidemic thresholds, and that greedy seed selection is the
+standard baseline for influence maximisation because of submodularity.
