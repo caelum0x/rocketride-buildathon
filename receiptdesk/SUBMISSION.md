@@ -12,6 +12,7 @@ user). Everything else is ready to paste.
 - App id: `‹yourDevId›.receiptdesk`
 - Version: `‹n›` (the immutable version number from the Deploy tab)
 - Launch link: `https://staging.rocketride.ai/?appid=‹yourDevId›.receiptdesk&version=‹n›`
+- Source: https://github.com/caelum0x/rocketride-buildathon/tree/main/receiptdesk
 
 **Who it's for (one sentence)**
 > A small or family business owner (or a club/society treasurer) who photographs a pile

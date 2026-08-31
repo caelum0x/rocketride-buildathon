@@ -12,6 +12,7 @@ user). Everything else is ready to paste.
 - App id: `‹yourDevId›.studypack`
 - Version: `‹n›` (the immutable version number from the Deploy tab)
 - Launch link: `https://staging.rocketride.ai/?appid=‹yourDevId›.studypack&version=‹n›`
+- Source: https://github.com/caelum0x/rocketride-buildathon/tree/main/studypack
 
 **Who it's for (one sentence)**
 > University students who need to turn a lecture — a recording, notes, or a photo of
